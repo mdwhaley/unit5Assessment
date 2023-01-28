@@ -237,7 +237,11 @@ module.exports = {
             ('Santiago', 4, 36),
             ('Valparaiso', 1, 36),
             ('Concón', 4, 36),
-            ('Montevideo', 2, 188);
+            ('Montevideo', 2, 188),
+            ('Park City', 5, 187),
+            ('Sedona', 5, 187),
+            ('Bend', 5, 187),
+            ('Nashville', 2, 187);
         `
       )
       .then(() => {
@@ -276,7 +280,9 @@ module.exports = {
         FROM cities
         JOIN countries
         ON cities.country_id = countries.country_id
-        ORDER BY rating DESC;`
+        ORDER BY 
+        rating DESC, country asc
+        ;`
       )
       .then((dbRes) => {
         res.status(200).send(dbRes[0]);

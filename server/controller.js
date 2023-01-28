@@ -31,6 +31,8 @@ module.exports = {
                 country_id integer references countries(country_id)
             );
 
+            
+
             insert into countries (name)
             values ('Afghanistan'),
             ('Albania'),
@@ -227,6 +229,15 @@ module.exports = {
             ('Yemen'),
             ('Zambia'),
             ('Zimbabwe');
+
+            INSERT INTO cities (name, rating, country_id)
+            VALUES  ('Viña del Mar', 5, 36),
+            ('Mendoza', 5, 7),
+            ('Buenos Aires', 3, 7),
+            ('Santiago', 4, 36),
+            ('Valparaiso', 1, 36),
+            ('Concón', 4, 36),
+            ('Montevideo', 2, 188);
         `
       )
       .then(() => {
@@ -264,7 +275,8 @@ module.exports = {
         `SELECT city_id, cities.name as city, rating, countries.country_id, countries.name as country 
         FROM cities
         JOIN countries
-        ON cities.country_id = countries.country_id;`
+        ON cities.country_id = countries.country_id
+        ORDER BY rating DESC;`
       )
       .then((dbRes) => {
         res.status(200).send(dbRes[0]);
